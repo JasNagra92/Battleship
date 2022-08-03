@@ -10,8 +10,8 @@ const ShipFactory = (length, position) => {
         // alert('direct hit!');
       }
     },
-    isSunk(position) {
-      if (position.every((x) => x === 'hit')) {
+    isSunk(array) {
+      if (array.every((x) => x === 'hit')) {
         this.sunk = true;
       }
     },
