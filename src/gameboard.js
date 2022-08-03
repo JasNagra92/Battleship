@@ -5,6 +5,16 @@ const GameboardFactory = () => {
     ships: [],
     missedShots: [],
     previousShots: [],
+    board: ( function makeBoard(){
+        const board = new Array(10);
+        for (let i = 0; i < 10;i++){
+            board[i] = new Array(10)
+            for (let j = 0; j < 10; j++){
+              board[i][j] = null
+            }
+        };
+        return board;
+    })(),
     receiveAttack(string) {
       if (this.previousShots.includes(string)) {
         throw new Error('Coordinates have already been hit');

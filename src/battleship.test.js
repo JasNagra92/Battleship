@@ -40,3 +40,18 @@ test('gameboard returns error if shooting same coordiante twice', () => {
   myBoard.receiveAttack('A3');
   expect(()=>{myBoard.receiveAttack('A3')}).toThrow();
 });
+test('board property of gameboard object should return 2D array', ()=>{
+  const myBoard = GameboardFactory();
+  expect(myBoard.board).toEqual([
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+])
+})
