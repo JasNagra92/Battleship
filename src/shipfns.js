@@ -3,12 +3,12 @@ const ShipFactory = (length, position) => {
     length,
     position,
     sunk: false,
-    hit(string) {
-      if (position.includes(string)) {
-        const index = position.indexOf(string);
-        position[index] = 'hit';
-        // alert('direct hit!');
-      }
+    hit(x, y) {
+      this.position.forEach(function (coordinates,index) {
+        if (coordinates[0] == x && coordinates[1] == y) {
+          position[index] = "hit";
+        }
+      });
     },
     isSunk(array) {
       if (array.every((x) => x === 'hit')) {
