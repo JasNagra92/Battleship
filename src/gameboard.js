@@ -40,5 +40,17 @@ const GameboardFactory = () => ({
     }
     return false;
   },
+  placeShip(shipObject, x, y, direction) {
+    const { length } = shipObject;
+    if (direction === 'right') {
+      for (let i = 0; i < length; i += 1) {
+        this.board[x][y++] = `s${length}`;
+      }
+    } else if (direction === 'down') {
+      for (let i = 0; i < length; i += 1) {
+        this.board[x++][y] = `s${length}`;
+      }
+    }
+  },
 });
 export { GameboardFactory };

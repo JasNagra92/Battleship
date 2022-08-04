@@ -67,3 +67,37 @@ test('newly created ship with position written as a set of 2 numbers should have
   const ship1 = GameboardFactory().ShipFactory(2, [[0, 0], [0, 1]]);
   expect(ship1.position).toEqual([[0, 0], [0, 1]]);
 });
+test('placeShip function which takes a shipObject, x,y coordinates as start, and a direction, should change the board array and replace null values with a string S + ship length', () => {
+  const myBoard = GameboardFactory();
+  myBoard.ships.push(myBoard.ShipFactory(4, [[0, 0], [0, 1], [0, 2], [0, 3]]));
+  myBoard.placeShip(myBoard.ships[0], 0, 0, 'right');
+  expect(myBoard.board).toEqual([
+    ['s4', 's4', 's4', 's4', null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
+test('placeShip function which takes a shipObject, x,y coordinates as start, and a direction, should change the board array and replace null values with a string S + ship length', () => {
+  const myBoard = GameboardFactory();
+  myBoard.ships.push(myBoard.ShipFactory(4, [[0, 0], [0, 1], [0, 2], [0, 3]]));
+  myBoard.placeShip(myBoard.ships[0], 0, 0, 'down');
+  expect(myBoard.board).toEqual([
+    ['s4', null, null, null, null, null, null, null, null, null],
+    ['s4', null, null, null, null, null, null, null, null, null],
+    ['s4', null, null, null, null, null, null, null, null, null],
+    ['s4', null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+  ]);
+});
