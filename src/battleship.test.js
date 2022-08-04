@@ -27,10 +27,7 @@ test('gameboard recieveAttack function to call ship in arrays hit method', () =>
 });
 test('gameboard stores missed shot in missed shots array', () => {
   const myBoard = GameboardFactory();
-  myBoard.ships[0] = GameboardFactory().ShipFactory(2, [
-    [0, 0],
-    [0, 1],
-  ]);
+  myBoard.ships.push(myBoard.ShipFactory(2, [[0, 0], [0, 1]]));
   myBoard.receiveAttack(2, 0);
   expect(myBoard.missedShots).toEqual([[2, 0]]);
 });
