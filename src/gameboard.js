@@ -16,8 +16,14 @@ const GameboardFactory = () => {
       return board;
     })(),
     receiveAttack(x, y) {
-      this.previousShots.push([x,y]);
-      if (this.ships.length > 0) {
+      if (
+        this.previousShots.forEach(function (coordinates) {
+          if (coordinates[0] == x && coordinates[1] == y) {
+            throw new Error('coordinates already hit');
+          }
+        })
+      ) {
+      } else if (this.ships.length > 0) {
         this.ships.forEach((ship) => {
           if (
             ship.position.forEach(function (coordinates) {
@@ -27,8 +33,12 @@ const GameboardFactory = () => {
               }
             })
           ) {
-          } else {this.missedShots.push([x,y])}
-        })
+            this.previousShots.push([x, y]);
+          } else {
+            this.missedShots.push([x, y]);
+            this.previousShots.push([x, y]);
+          }
+        });
       }
     },
     ShipFactory,
