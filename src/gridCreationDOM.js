@@ -11,6 +11,8 @@ function createPlayerGrid() {
   const playerSide = document.createElement('div');
   const cpuSide = document.createElement('div');
   playerSide.classList.add('board');
+  playerSide.id = 'playerBoard';
+  cpuSide.id = 'cpuBoard';
   cpuSide.classList.add('board');
 
   main.appendChild(playerSide);
@@ -30,5 +32,17 @@ function createPlayerGrid() {
       cpuDiv.classList.add('boardSquare');
     }
   }
+
+  const label = document.createElement('label');
+  label.setAttribute('for', 'name');
+  label.innerHTML = 'Player name:';
+  const input = document.createElement('input');
+  input.setAttribute('id', 'name');
+  document.body.appendChild(label);
+  document.body.appendChild(input);
+  const createPlayerBtn = document.createElement('button');
+  createPlayerBtn.innerHTML = 'create player';
+  createPlayerBtn.id = 'createPlayer';
+  document.body.appendChild(createPlayerBtn);
 }
 export { createPlayerGrid };
