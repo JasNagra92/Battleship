@@ -30,7 +30,7 @@ const GameboardFactory = () => ({
         }
       });
     });
-    if (!hit) { this.missedShots.push([x, y]) };
+    if (!hit) { this.missedShots.push([x, y]); }
     this.previousShots.push([x, y]);
   },
   ShipFactory,

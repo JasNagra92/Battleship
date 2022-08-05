@@ -26,8 +26,10 @@ function createPlayerGrid() {
       cpuSide.appendChild(cpuDiv);
       playerDiv.dataset.xCoordinate = i;
       playerDiv.dataset.yCoordinate = j;
+      playerDiv.dataset.side = 'player';
       cpuDiv.dataset.xCoordinate = i;
       cpuDiv.dataset.yCoordinate = j;
+      cpuDiv.dataset.side = 'cpu';
       playerDiv.classList.add('boardSquare');
       cpuDiv.classList.add('boardSquare');
     }
