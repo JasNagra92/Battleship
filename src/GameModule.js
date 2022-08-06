@@ -28,8 +28,16 @@ function GameObject() {
         if (cpu.gameboard.checkAllSunk(cpu.gameboard.ships)) { alert('you win'); }
         turn = 'cpu';
         target = 'player';
-        cpu.attack(player1.gameboard, getRandomInt(9), getRandomInt(9), target);
-        if (player1.gamebaord.checkAllSunk(player1.gamebaord.ships)) { alert('you lose'); }
+        let repeat = true;
+        while (repeat) {
+          try {
+            cpu.attack(player1.gameboard, getRandomInt(9), getRandomInt(9), target);
+            repeat = false;
+          } catch (error) {
+            repeat = true;
+          }
+        }
+        if (player1.gameboard.checkAllSunk(player1.gameboard.ships)) { alert('you lose'); }
         turn = 'player';
       }
     });

@@ -18,7 +18,7 @@ const GameboardFactory = () => ({
   receiveAttack(x, y, target) {
     this.previousShots.forEach((coordinates) => {
       if (coordinates[0] === x && coordinates[1] === y) {
-        console.log('coordinates already hit');
+        throw new Error('coordinates already hit');
       }
     });
     let hit = false;
