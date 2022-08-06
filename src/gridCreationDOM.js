@@ -18,8 +18,8 @@ function createPlayerGrid() {
   main.appendChild(playerSide);
   main.appendChild(cpuSide);
 
-  for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 10; j++) {
+  for (let i = 0; i < 10; i += 1) {
+    for (let j = 0; j < 10; j += 1) {
       const playerDiv = document.createElement('div');
       playerSide.appendChild(playerDiv);
       const cpuDiv = document.createElement('div');
@@ -47,4 +47,13 @@ function createPlayerGrid() {
   createPlayerBtn.id = 'createPlayer';
   document.body.appendChild(createPlayerBtn);
 }
-export { createPlayerGrid };
+function renderMisses(x, y, target) {
+  const missedBox = document.querySelector(`[data-x-Coordinate="${x}"][data-y-Coordinate="${y}"][data-side='${target}']`);
+  missedBox.classList.add('missed');
+}
+function renderHits(x, y, target) {
+  const hitBox = document.querySelector(`[data-x-Coordinate="${x}"][data-y-Coordinate="${y}"][data-side='${target}']`);
+  hitBox.classList.add('hit');
+}
+// eslint-disable-next-line import/prefer-default-export
+export { createPlayerGrid, renderMisses, renderHits };

@@ -1,4 +1,5 @@
 import { ShipFactory } from './shipfns';
+import { renderMisses, renderHits } from './gridCreationDOM';
 
 const GameboardFactory = () => ({
   ships: [],
@@ -14,10 +15,10 @@ const GameboardFactory = () => ({
     }
     return board;
   }()),
-  receiveAttack(x, y) {
+  receiveAttack(x, y, target) {
     this.previousShots.forEach((coordinates) => {
       if (coordinates[0] === x && coordinates[1] === y) {
-        throw new Error('coordinates already hit');
+        console.log('coordinates already hit');
       }
     });
     let hit = false;
@@ -25,12 +26,13 @@ const GameboardFactory = () => ({
       ship.position.forEach((coordinates) => {
         if (coordinates[0] === x && coordinates[1] === y) {
           ship.hit(x, y);
+          renderHits(x, y, target);
           hit = true;
           ship.isSunk(ship.position);
         }
       });
     });
-    if (!hit) { this.missedShots.push([x, y]); }
+    if (!hit) { this.missedShots.push([x, y]); renderMisses(x, y, target); }
     this.previousShots.push([x, y]);
   },
   ShipFactory,
@@ -44,13 +46,16 @@ const GameboardFactory = () => ({
     const { length } = shipObject;
     if (direction === 'right') {
       for (let i = 0; i < length; i += 1) {
+        // eslint-disable-next-line no-plusplus, no-param-reassign
         this.board[x][y++] = `s${length}`;
       }
     } else if (direction === 'down') {
       for (let i = 0; i < length; i += 1) {
+        // eslint-disable-next-line no-plusplus, no-param-reassign
         this.board[x++][y] = `s${length}`;
       }
     }
   },
 });
+// eslint-disable-next-line import/prefer-default-export
 export { GameboardFactory };

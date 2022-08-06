@@ -3,12 +3,9 @@ import { Player, CpuPlayer } from './playerfactory';
 import { GameboardFactory } from './gameboard';
 import { ShipFactory } from './shipfns';
 
-function GameObject() {
-  function renderPlayerMisses(x, y) {
-    const missedBox = document.querySelector(`[data-x-Coordinate="${x}"][data-y-Coordinate="${y}"][data-side=cpu]`);
-    missedBox.classList.add('missed');
-  }
+import { createPlayerGrid } from './gridCreationDOM';
 
+function GameObject() {
   function StartGame() {
     function getRandomInt(max) {
       return Math.floor(Math.random() * max);
@@ -26,10 +23,13 @@ function GameObject() {
       if (turn === 'player') {
         const xCoordinate = +e.target.dataset.xCoordinate;
         const yCoordinate = +e.target.dataset.yCoordinate;
-        renderPlayerMisses(xCoordinate, yCoordinate);
-        player1.attack(cpu.gameboard, xCoordinate, yCoordinate);
+        let target = 'cpu';
+        player1.attack(cpu.gameboard, xCoordinate, yCoordinate, target);
+        if (cpu.gameboard.checkAllSunk(cpu.gameboard.ships)) { alert('you win'); }
         turn = 'cpu';
-        cpu.attack(player1.gameboard, getRandomInt(9), getRandomInt(9));
+        target = 'player';
+        cpu.attack(player1.gameboard, getRandomInt(9), getRandomInt(9), target);
+        if (player1.gamebaord.checkAllSunk(player1.gamebaord.ships)) { alert('you lose'); }
         turn = 'player';
       }
     });
@@ -40,6 +40,8 @@ function GameObject() {
     GameboardFactory,
     ShipFactory,
     StartGame,
+    createPlayerGrid,
   };
 }
+// eslint-disable-next-line import/prefer-default-export
 export { GameObject };

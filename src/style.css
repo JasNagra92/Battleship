@@ -23,3 +23,6 @@
 .missed{
     background-color: red;
 }
+.hit{
+    background-color: black;
+}
