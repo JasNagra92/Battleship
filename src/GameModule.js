@@ -2,7 +2,7 @@
 import { Player, CpuPlayer } from './playerfactory';
 import { GameboardFactory } from './gameboard';
 import { ShipFactory } from './shipfns';
-import { getRandomInt, checkValid } from './helpers';
+import { getRandomInt, checkHorizontalValid, checkVerticalValid } from './helpers';
 
 import { createPlayerGrid } from './gridCreationDOM';
 
@@ -23,16 +23,31 @@ function GameObject() {
     let turn = 'player';
     const cpuBoard = document.querySelector('#cpuBoard');
     let gamePhase = 'setup';
-    const shipPlacementDirection = 'horizontal';
+    let shipDirection = 'horizontal';
+    const shipDirectionBtn = document.querySelector('#shipOrientation');
+    shipDirectionBtn.addEventListener('click', () => {
+      shipDirection === 'horizontal' ? shipDirection = 'vertical' : shipDirection = 'horizontal';
+    });
     const playerBoard = document.querySelector('#playerBoard');
     playerBoard.addEventListener('click', (e) => {
-      if (gamePhase === 'setup' && shipPlacementDirection === 'horizontal') {
+      if (gamePhase === 'setup' && shipDirection === 'horizontal') {
         const xCoordinate = +e.target.dataset.xCoordinate;
         const yCoordinate = +e.target.dataset.yCoordinate;
         const length = +document.querySelector('input[name = "shipSelector"]:checked').value;
         const radioBtn = document.querySelector('input[name = "shipSelector"]:checked');
-        if (checkValid(length, yCoordinate, shipPlacementDirection)) {
-          player1.gameboard.placeShip(xCoordinate, yCoordinate, length, radioBtn);
+        if (checkHorizontalValid(length, yCoordinate)) {
+          player1.gameboard.placeShip(xCoordinate, yCoordinate, length, radioBtn, shipDirection);
+        } else {
+          alert('ship wont fit here');
+        }
+      } else
+      if (gamePhase === 'setup' && shipDirection === 'vertical') {
+        const xCoordinate = +e.target.dataset.xCoordinate;
+        const yCoordinate = +e.target.dataset.yCoordinate;
+        const length = +document.querySelector('input[name = "shipSelector"]:checked').value;
+        const radioBtn = document.querySelector('input[name = "shipSelector"]:checked');
+        if (checkVerticalValid(length, xCoordinate)) {
+          player1.gameboard.placeShip(xCoordinate, yCoordinate, length, radioBtn, shipDirection);
         } else {
           alert('ship wont fit here');
         }
