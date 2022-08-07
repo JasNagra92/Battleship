@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { renderMisses, renderHits } from "./gridCreationDOM";
+import { renderMisses, renderHits } from './gridCreationDOM';
+
 const ShipFactory = (length, position) => ({
   length,
   position,
@@ -10,7 +11,7 @@ const ShipFactory = (length, position) => ({
         // eslint-disable-next-line no-param-reassign
         position[index] = 'hit';
         renderHits(x, y, target);
-      } else {renderMisses(x, y, target)}
+      } else { renderMisses(x, y, target); }
     });
   },
   isSunk(array) {

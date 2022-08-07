@@ -42,10 +42,12 @@ function GameObject() {
             coordinates.push([xCoordinate, i]);
           }
           player1.gameboard.populateShipsArray(length, coordinates);
-          console.log(player1.gameboard)
         } else {
           alert('ship wont fit here');
         }
+      }
+      if (player1.gameboard.ships.length === 5) {
+        gamePhase = 'attack';
       }
     });
     cpuBoard.addEventListener('click', (e) => {

@@ -35,17 +35,27 @@ function createPlayerGrid() {
     }
   }
 
-  const label = document.createElement('label');
-  label.setAttribute('for', 'name');
-  label.innerHTML = 'Player name:';
-  const input = document.createElement('input');
-  input.setAttribute('id', 'name');
-  document.body.appendChild(label);
-  document.body.appendChild(input);
+  const namelabel = document.createElement('label');
+  namelabel.setAttribute('for', 'name');
+  namelabel.innerHTML = 'Player name:';
+  const nameInput = document.createElement('Input');
+  nameInput.setAttribute('id', 'name');
+  document.body.appendChild(namelabel);
+  document.body.appendChild(nameInput);
   const createPlayerBtn = document.createElement('button');
   createPlayerBtn.innerHTML = 'create player';
   createPlayerBtn.id = 'createPlayer';
   document.body.appendChild(createPlayerBtn);
+
+  const ship2label = document.createElement('label');
+  ship2label.setAttribute('for', 'ship');
+  ship2label.innerHTML = 'cruiser-length 2';
+  const ship2radio = document.createElement('input');
+  ship2radio.setAttribute('type', 'radio');
+  ship2radio.setAttribute('name', 'shipSelector');
+  ship2radio.setAttribute('value', '2');
+  document.body.appendChild(ship2label);
+  document.body.appendChild(ship2radio);
 }
 function renderMisses(x, y, target) {
   const missedBox = document.querySelector(`[data-x-Coordinate="${x}"][data-y-Coordinate="${y}"][data-side='${target}']`);
