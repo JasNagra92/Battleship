@@ -5,16 +5,6 @@ const GameboardFactory = () => ({
   ships: [],
   missedShots: [],
   previousShots: [],
-  board: (function makeBoard() {
-    const board = new Array(10);
-    for (let i = 0; i < 10; i += 1) {
-      board[i] = new Array(10);
-      for (let j = 0; j < 10; j += 1) {
-        board[i][j] = null;
-      }
-    }
-    return board;
-  }()),
   receiveAttack(x, y, target) {
     this.previousShots.forEach((coordinates) => {
       if (coordinates[0] === x && coordinates[1] === y) {
@@ -31,7 +21,7 @@ const GameboardFactory = () => ({
     this.previousShots.push([x, y]);
   },
   populateShipsArray(length, coordinates) {
-    this.ships.push(ShipFactory(length, coordinates))
+    this.ships.push(ShipFactory(length, coordinates));
   },
   checkAllSunk(array) {
     if (array.every((ship) => ship.sunk === true)) {
@@ -39,19 +29,22 @@ const GameboardFactory = () => ({
     }
     return false;
   },
-  placeShip(shipObject, x, y, direction) {
-    const { length } = shipObject;
-    if (direction === 'right') {
-      for (let i = 0; i < length; i += 1) {
-        // eslint-disable-next-line no-plusplus, no-param-reassign
-        this.board[x][y++] = `s${length}`;
-      }
-    } else if (direction === 'down') {
-      for (let i = 0; i < length; i += 1) {
-        // eslint-disable-next-line no-plusplus, no-param-reassign
-        this.board[x++][y] = `s${length}`;
-      }
+  placeShip(xCoordinate, yCoordinate, length, radioBtn) {
+    for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
+      const shipSquare = document.querySelector(
+        `[data-x-Coordinate="${xCoordinate}"][data-y-Coordinate="${i}"][data-side="player"]`,
+      );
+      shipSquare.classList.add('ship');
     }
+    const coordinates = [];
+    for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
+      coordinates.push([xCoordinate, i]);
+    }
+    this.populateShipsArray(length, coordinates);
+    radioBtn.setAttribute('disabled', 'disabled');
+    radioBtn.removeAttribute('checked');
+    const btns = [...document.querySelectorAll('input[name="shipSelector"]:enabled')];
+    if (btns.length >= 1) { btns[0].checked = true; }
   },
 });
 // eslint-disable-next-line import/prefer-default-export

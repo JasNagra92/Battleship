@@ -23,31 +23,16 @@ function GameObject() {
     let turn = 'player';
     const cpuBoard = document.querySelector('#cpuBoard');
     let gamePhase = 'setup';
-    const direction = 'horizontal';
+    const shipPlacementDirection = 'horizontal';
     const playerBoard = document.querySelector('#playerBoard');
     playerBoard.addEventListener('click', (e) => {
-      if (gamePhase === 'setup' && direction === 'horizontal') {
+      if (gamePhase === 'setup' && shipPlacementDirection === 'horizontal') {
         const xCoordinate = +e.target.dataset.xCoordinate;
         const yCoordinate = +e.target.dataset.yCoordinate;
         const length = +document.querySelector('input[name = "shipSelector"]:checked').value;
         const radioBtn = document.querySelector('input[name = "shipSelector"]:checked');
-
-        if (checkValid(length, yCoordinate, direction)) {
-          for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
-            const shipSquare = document.querySelector(
-              `[data-x-Coordinate="${xCoordinate}"][data-y-Coordinate="${i}"][data-side="player"]`,
-            );
-            shipSquare.classList.add('ship');
-          }
-          const coordinates = [];
-          for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
-            coordinates.push([xCoordinate, i]);
-          }
-          player1.gameboard.populateShipsArray(length, coordinates);
-          radioBtn.setAttribute('disabled', 'disabled');
-          radioBtn.removeAttribute('checked');
-          const btns = [...document.querySelectorAll('input[name="shipSelector"]:enabled')];
-          if (btns.length >= 1) { btns[0].checked = true; }
+        if (checkValid(length, yCoordinate, shipPlacementDirection)) {
+          player1.gameboard.placeShip(xCoordinate, yCoordinate, length, radioBtn);
         } else {
           alert('ship wont fit here');
         }
@@ -89,10 +74,6 @@ function GameObject() {
     });
   }
   return {
-    Player,
-    CpuPlayer,
-    GameboardFactory,
-    ShipFactory,
     StartGame,
     createPlayerGrid,
   };
