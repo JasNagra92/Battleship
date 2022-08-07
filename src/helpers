@@ -1,4 +1,9 @@
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
-export { getRandomInt };
+function checkValid(length, y, direction) {
+  if (direction === 'horizontal' && y + length < 11) {
+    return true;
+  }
+}
+export { getRandomInt, checkValid };

@@ -30,7 +30,9 @@ const GameboardFactory = () => ({
 
     this.previousShots.push([x, y]);
   },
-  ShipFactory,
+  populateShipsArray(length, coordinates) {
+    this.ships.push(ShipFactory(length, coordinates))
+  },
   checkAllSunk(array) {
     if (array.every((ship) => ship.sunk === true)) {
       return true;
