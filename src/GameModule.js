@@ -18,7 +18,7 @@ function GameObject() {
         [2, 0],
         [2, 1],
         [2, 2],
-      ])
+      ]),
     );
     let turn = 'player';
     const cpuBoard = document.querySelector('#cpuBoard');
@@ -29,11 +29,13 @@ function GameObject() {
       if (gamePhase === 'setup' && direction === 'horizontal') {
         const xCoordinate = +e.target.dataset.xCoordinate;
         const yCoordinate = +e.target.dataset.yCoordinate;
-        const length = 3;
+        const length = +document.querySelector('input[name = "shipSelector"]:checked').value;
+        const radioBtn = document.querySelector('input[name = "shipSelector"]:checked');
+
         if (checkValid(length, yCoordinate, direction)) {
           for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
             const shipSquare = document.querySelector(
-              `[data-x-Coordinate="${xCoordinate}"][data-y-Coordinate="${i}"][data-side="player"]`
+              `[data-x-Coordinate="${xCoordinate}"][data-y-Coordinate="${i}"][data-side="player"]`,
             );
             shipSquare.classList.add('ship');
           }
@@ -42,6 +44,10 @@ function GameObject() {
             coordinates.push([xCoordinate, i]);
           }
           player1.gameboard.populateShipsArray(length, coordinates);
+          radioBtn.setAttribute('disabled', 'disabled');
+          radioBtn.removeAttribute('checked');
+          const btns = [...document.querySelectorAll('input[name="shipSelector"]:enabled')];
+          if (btns.length >= 1) { btns[0].checked = true; }
         } else {
           alert('ship wont fit here');
         }
@@ -68,7 +74,7 @@ function GameObject() {
               player1.gameboard,
               getRandomInt(9),
               getRandomInt(9),
-              target
+              target,
             );
             repeat = false;
           } catch (error) {
