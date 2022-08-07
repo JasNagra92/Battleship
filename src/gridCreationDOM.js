@@ -39,7 +39,7 @@ function createPlayerGrid() {
   optionsDiv.classList.add('optionsContainer');
   const nameDiv = document.createElement('div');
   const shipSelectDiv = document.createElement('div');
-  shipSelectDiv.classList.add('shipSelectDiv')
+  shipSelectDiv.classList.add('shipSelectDiv');
 
   const namelabel = document.createElement('label');
   namelabel.setAttribute('for', 'name');
@@ -117,7 +117,11 @@ function renderHits(x, y, target) {
   const hitBox = document.querySelector(
     `[data-x-Coordinate="${x}"][data-y-Coordinate="${y}"][data-side='${target}']`
   );
-  hitBox.classList.replace('ship', 'hit');
+  if (hitBox.classList.contains('ship')) {
+    hitBox.classList.replace('ship', 'hit');
+  } else {
+    hitBox.classList.add('hit');
+  }
 }
 // eslint-disable-next-line import/prefer-default-export
 export { createPlayerGrid, renderMisses, renderHits };
