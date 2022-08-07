@@ -8,6 +8,34 @@
     <title>Battleship</title>
 </head>
 <body>
-    
+    <div class="optionsContainer">
+        <div>
+            <label for="name">Player name:</label>
+            <input type="text" id="name">
+            <button id="createPlayer">Create Player</button>
+        </div>
+        <div class="shipSelectDiv">
+            <label for="ship">
+                Destroyer - length 2
+                <input type="radio" name="shipSelector" value="2" checked="true">
+            </label>
+            <label for="ship">
+                Submarine - length 3
+                <input type="radio" name="shipSelector" value="3">
+            </label>
+            <label for="ship">
+                Cruiser - length 3
+                <input type="radio" name="shipSelector" value="3">
+            </label>
+            <label for="ship">
+                Battelship - length 4
+                <input type="radio" name="shipSelector" value="4">
+            </label>
+            <label for="ship">
+                Carrier - length 5
+                <input type="radio" name="shipSelector" value="5">
+            </label>
+        </div>
+    </div>
 </body>
 </html>
