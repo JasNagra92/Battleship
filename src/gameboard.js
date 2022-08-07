@@ -21,18 +21,13 @@ const GameboardFactory = () => ({
         throw new Error('coordinates already hit');
       }
     });
-    let hit = false;
+
     this.ships.forEach((ship) => {
-      ship.position.forEach((coordinates) => {
-        if (coordinates[0] === x && coordinates[1] === y) {
-          ship.hit(x, y);
-          renderHits(x, y, target);
-          hit = true;
-          ship.isSunk(ship.position);
-        }
-      });
+      ship.hit(x, y, target);
+
+      ship.isSunk(ship.position);
     });
-    if (!hit) { this.missedShots.push([x, y]); renderMisses(x, y, target); }
+
     this.previousShots.push([x, y]);
   },
   ShipFactory,
