@@ -2,14 +2,12 @@
 import { Player, CpuPlayer } from './playerfactory';
 import { GameboardFactory } from './gameboard';
 import { ShipFactory } from './shipfns';
+import { getRandomInt } from './helpers';
 
 import { createPlayerGrid } from './gridCreationDOM';
 
 function GameObject() {
   function StartGame() {
-    function getRandomInt(max) {
-      return Math.floor(Math.random() * max);
-    }
     const playerName = document.querySelector('#name').value;
     const player1 = Player(playerName);
     player1.gameboard = GameboardFactory();
