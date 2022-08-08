@@ -6,6 +6,8 @@ import {
   getRandomInt,
   checkHorizontalValid,
   checkVerticalValid,
+  checkHorizontalCollision,
+  checkVerticalCollision,
 } from './helpers';
 
 import { createPlayerGrid } from './gridCreationDOM';
@@ -36,6 +38,7 @@ function GameObject() {
         : (shipDirection = 'horizontal');
     });
     const playerBoard = document.querySelector('#playerBoard');
+
     playerBoard.addEventListener('mouseover', (e) => {
       if (gamePhase === 'setup' && shipDirection === 'horizontal') {
         const length = +document.querySelector(
@@ -44,6 +47,15 @@ function GameObject() {
         const yCoordinate = +e.target.dataset.yCoordinate;
         for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
           const div = document.querySelector(`[data-x-Coordinate="${e.target.dataset.xCoordinate}"][data-y-Coordinate="${i}"]`);
+          div.classList.add('selected');
+        }
+      } else if (gamePhase === 'setup' && shipDirection === 'vertical') {
+        const length = +document.querySelector(
+          'input[name = "shipSelector"]:checked',
+        ).value;
+        const xCoordinate = +e.target.dataset.xCoordinate;
+        for (let i = xCoordinate; i < xCoordinate + length; i += 1) {
+          const div = document.querySelector(`[data-x-Coordinate="${i}"][data-y-Coordinate="${e.target.dataset.yCoordinate}"]`);
           div.classList.add('selected');
         }
       }
@@ -58,8 +70,18 @@ function GameObject() {
           const div = document.querySelector(`[data-x-Coordinate="${e.target.dataset.xCoordinate}"][data-y-Coordinate="${i}"]`);
           div.classList.remove('selected');
         }
+      } else if (gamePhase === 'setup' && shipDirection === 'vertical') {
+        const length = +document.querySelector(
+          'input[name = "shipSelector"]:checked',
+        ).value;
+        const xCoordinate = +e.target.dataset.xCoordinate;
+        for (let i = xCoordinate; i < xCoordinate + length; i += 1) {
+          const div = document.querySelector(`[data-x-Coordinate="${i}"][data-y-Coordinate="${e.target.dataset.yCoordinate}"]`);
+          div.classList.remove('selected');
+        }
       }
     });
+
     playerBoard.addEventListener('click', (e) => {
       if (gamePhase === 'setup' && shipDirection === 'horizontal') {
         const xCoordinate = +e.target.dataset.xCoordinate;
@@ -70,7 +92,8 @@ function GameObject() {
         const radioBtn = document.querySelector(
           'input[name = "shipSelector"]:checked',
         );
-        if (checkHorizontalValid(length, yCoordinate)) {
+        // eslint-disable-next-line max-len
+        if (checkHorizontalValid(length, yCoordinate) && checkHorizontalCollision(length, xCoordinate, yCoordinate)) {
           player1.gameboard.placeShip(
             xCoordinate,
             yCoordinate,
@@ -90,7 +113,8 @@ function GameObject() {
         const radioBtn = document.querySelector(
           'input[name = "shipSelector"]:checked',
         );
-        if (checkVerticalValid(length, xCoordinate)) {
+        // eslint-disable-next-line max-len
+        if (checkVerticalValid(length, xCoordinate) && checkVerticalCollision(length, xCoordinate, yCoordinate)) {
           player1.gameboard.placeShip(
             xCoordinate,
             yCoordinate,

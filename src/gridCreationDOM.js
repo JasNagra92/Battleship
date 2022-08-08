@@ -2,8 +2,8 @@ import './style.css';
 
 function createPlayerGrid() {
   const h1 = document.createElement('h1');
-  const optionsContainer = document.querySelector('.optionsContainer')
-  document.body.insertBefore(h1, optionsContainer)
+  const optionsContainer = document.querySelector('.optionsContainer');
+  document.body.insertBefore(h1, optionsContainer);
 
   const main = document.createElement('div');
   document.body.insertBefore(main, optionsContainer);
@@ -33,6 +33,7 @@ function createPlayerGrid() {
       cpuDiv.dataset.side = 'cpu';
       playerDiv.classList.add('boardSquare');
       cpuDiv.classList.add('boardSquare');
+      cpuDiv.classList.add('cpuboard');
     }
   }
 }

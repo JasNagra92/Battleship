@@ -11,4 +11,30 @@ function checkVerticalValid(length, x) {
     return true;
   }
 }
-export { getRandomInt, checkHorizontalValid, checkVerticalValid };
+function checkHorizontalCollision(length, x, y) {
+  for (let i = y; i < y + length; i += 1) {
+    const shipSquare = document.querySelector(
+      `[data-x-Coordinate="${x}"][data-y-Coordinate="${i}"]`,
+    );
+    if (shipSquare.classList.contains('ship')) {
+      return false;
+    }
+  } return true;
+}
+function checkVerticalCollision(length, x, y) {
+  for (let i = x; i < x + length; i += 1) {
+    const shipSquare = document.querySelector(
+      `[data-x-Coordinate="${i}"][data-y-Coordinate="${y}"]`,
+    );
+    if (shipSquare.classList.contains('ship')) {
+      return false;
+    }
+  } return true;
+}
+export {
+  getRandomInt,
+  checkHorizontalValid,
+  checkVerticalValid,
+  checkHorizontalCollision,
+  checkVerticalCollision,
+};
