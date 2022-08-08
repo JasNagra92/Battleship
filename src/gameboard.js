@@ -32,8 +32,11 @@ const GameboardFactory = () => ({
         coordinates.push([xCoordinate, i]);
       }
       this.populateShipsArray(length, coordinates);
+      /* logic to prevent user from placing a ship of the same length more than once */
       radioBtn.setAttribute('disabled', 'disabled');
       radioBtn.removeAttribute('checked');
+      /* logic to automatically select the next radio button and set it to checked 
+      after each ship is placed */
       const btns = [
         ...document.querySelectorAll('input[name="shipSelector"]:enabled'),
       ];
