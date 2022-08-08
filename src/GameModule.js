@@ -24,7 +24,7 @@ function GameObject() {
         [2, 0],
         [2, 1],
         [2, 2],
-      ]),
+      ])
     );
     let turn = 'player';
     const cpuBoard = document.querySelector('#cpuBoard');
@@ -44,20 +44,24 @@ function GameObject() {
     playerBoard.addEventListener('mouseover', (e) => {
       if (gamePhase === 'setup' && shipDirection === 'horizontal') {
         const length = +document.querySelector(
-          'input[name = "shipSelector"]:checked',
+          'input[name = "shipSelector"]:checked'
         ).value;
         const yCoordinate = +e.target.dataset.yCoordinate;
         for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
-          const div = document.querySelector(`[data-x-Coordinate="${e.target.dataset.xCoordinate}"][data-y-Coordinate="${i}"]`);
+          const div = document.querySelector(
+            `[data-x-Coordinate="${e.target.dataset.xCoordinate}"][data-y-Coordinate="${i}"]`
+          );
           div.classList.add('selected');
         }
       } else if (gamePhase === 'setup' && shipDirection === 'vertical') {
         const length = +document.querySelector(
-          'input[name = "shipSelector"]:checked',
+          'input[name = "shipSelector"]:checked'
         ).value;
         const xCoordinate = +e.target.dataset.xCoordinate;
         for (let i = xCoordinate; i < xCoordinate + length; i += 1) {
-          const div = document.querySelector(`[data-x-Coordinate="${i}"][data-y-Coordinate="${e.target.dataset.yCoordinate}"]`);
+          const div = document.querySelector(
+            `[data-x-Coordinate="${i}"][data-y-Coordinate="${e.target.dataset.yCoordinate}"]`
+          );
           div.classList.add('selected');
         }
       }
@@ -65,20 +69,24 @@ function GameObject() {
     playerBoard.addEventListener('mouseout', (e) => {
       if (gamePhase === 'setup' && shipDirection === 'horizontal') {
         const length = +document.querySelector(
-          'input[name = "shipSelector"]:checked',
+          'input[name = "shipSelector"]:checked'
         ).value;
         const yCoordinate = +e.target.dataset.yCoordinate;
         for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
-          const div = document.querySelector(`[data-x-Coordinate="${e.target.dataset.xCoordinate}"][data-y-Coordinate="${i}"]`);
+          const div = document.querySelector(
+            `[data-x-Coordinate="${e.target.dataset.xCoordinate}"][data-y-Coordinate="${i}"]`
+          );
           div.classList.remove('selected');
         }
       } else if (gamePhase === 'setup' && shipDirection === 'vertical') {
         const length = +document.querySelector(
-          'input[name = "shipSelector"]:checked',
+          'input[name = "shipSelector"]:checked'
         ).value;
         const xCoordinate = +e.target.dataset.xCoordinate;
         for (let i = xCoordinate; i < xCoordinate + length; i += 1) {
-          const div = document.querySelector(`[data-x-Coordinate="${i}"][data-y-Coordinate="${e.target.dataset.yCoordinate}"]`);
+          const div = document.querySelector(
+            `[data-x-Coordinate="${i}"][data-y-Coordinate="${e.target.dataset.yCoordinate}"]`
+          );
           div.classList.remove('selected');
         }
       }
@@ -89,19 +97,22 @@ function GameObject() {
         const xCoordinate = +e.target.dataset.xCoordinate;
         const yCoordinate = +e.target.dataset.yCoordinate;
         const length = +document.querySelector(
-          'input[name = "shipSelector"]:checked',
+          'input[name = "shipSelector"]:checked'
         ).value;
         const radioBtn = document.querySelector(
-          'input[name = "shipSelector"]:checked',
+          'input[name = "shipSelector"]:checked'
         );
         // eslint-disable-next-line max-len
-        if (checkHorizontalValid(length, yCoordinate) && checkHorizontalCollision(length, xCoordinate, yCoordinate)) {
+        if (
+          checkHorizontalValid(length, yCoordinate) &&
+          checkHorizontalCollision(length, xCoordinate, yCoordinate)
+        ) {
           player1.gameboard.placeShip(
             xCoordinate,
             yCoordinate,
             length,
             radioBtn,
-            shipDirection,
+            shipDirection
           );
         } else {
           alert('ship wont fit here');
@@ -110,25 +121,32 @@ function GameObject() {
         const xCoordinate = +e.target.dataset.xCoordinate;
         const yCoordinate = +e.target.dataset.yCoordinate;
         const length = +document.querySelector(
-          'input[name = "shipSelector"]:checked',
+          'input[name = "shipSelector"]:checked'
         ).value;
         const radioBtn = document.querySelector(
-          'input[name = "shipSelector"]:checked',
+          'input[name = "shipSelector"]:checked'
         );
         // eslint-disable-next-line max-len
-        if (checkVerticalValid(length, xCoordinate) && checkVerticalCollision(length, xCoordinate, yCoordinate)) {
+        if (
+          checkVerticalValid(length, xCoordinate) &&
+          checkVerticalCollision(length, xCoordinate, yCoordinate)
+        ) {
           player1.gameboard.placeShip(
             xCoordinate,
             yCoordinate,
             length,
             radioBtn,
-            shipDirection,
+            shipDirection
           );
         } else {
           alert('ship wont fit here');
         }
       }
       if (player1.gameboard.ships.length === 5) {
+        const shipSquares = document.querySelectorAll('.selected');
+        shipSquares.forEach((square) => {
+          square.classList.remove('selected');
+        });
         gamePhase = 'attack';
       }
     });
@@ -150,7 +168,7 @@ function GameObject() {
               player1.gameboard,
               getRandomInt(9),
               getRandomInt(9),
-              target,
+              target
             );
             repeat = false;
           } catch (error) {

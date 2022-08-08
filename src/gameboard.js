@@ -1,5 +1,4 @@
 import { ShipFactory } from './shipfns';
-import { renderMisses, renderHits } from './gridCreationDOM';
 
 const GameboardFactory = () => ({
   ships: [],
