@@ -30,12 +30,14 @@ function GameObject() {
     const cpuBoard = document.querySelector('#cpuBoard');
     let gamePhase = 'setup';
     let shipDirection = 'horizontal';
+    const directionDisplay = document.querySelector('#currentDirection');
     const shipDirectionBtn = document.querySelector('#shipOrientation');
     shipDirectionBtn.addEventListener('click', () => {
       // eslint-disable-next-line no-unused-expressions
       shipDirection === 'horizontal'
         ? (shipDirection = 'vertical')
         : (shipDirection = 'horizontal');
+      directionDisplay.innerHTML = `Current Placement:${shipDirection}`;
     });
     const playerBoard = document.querySelector('#playerBoard');
 

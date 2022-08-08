@@ -4,21 +4,12 @@ import { renderMisses, renderHits } from './gridCreationDOM';
 const GameboardFactory = () => ({
   ships: [],
   missedShots: [],
-  previousShots: [],
-  receiveAttack(x, y, target) {
-    this.previousShots.forEach((coordinates) => {
-      if (coordinates[0] === x && coordinates[1] === y) {
-        throw new Error('coordinates already hit');
-      }
-    });
 
+  receiveAttack(x, y, target) {
     this.ships.forEach((ship) => {
       ship.hit(x, y, target);
-
       ship.isSunk(ship.position);
     });
-
-    this.previousShots.push([x, y]);
   },
   populateShipsArray(length, coordinates) {
     this.ships.push(ShipFactory(length, coordinates));
@@ -33,7 +24,7 @@ const GameboardFactory = () => ({
     if (direction === 'horizontal') {
       for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
         const shipSquare = document.querySelector(
-          `[data-x-Coordinate="${xCoordinate}"][data-y-Coordinate="${i}"][data-side="player"]`,
+          `[data-x-Coordinate="${xCoordinate}"][data-y-Coordinate="${i}"][data-side="player"]`
         );
         shipSquare.classList.add('ship');
       }
@@ -53,7 +44,7 @@ const GameboardFactory = () => ({
     } else if (direction === 'vertical') {
       for (let i = xCoordinate; i < xCoordinate + length; i += 1) {
         const shipSquare = document.querySelector(
-          `[data-x-Coordinate="${i}"][data-y-Coordinate="${yCoordinate}"][data-side="player"]`,
+          `[data-x-Coordinate="${i}"][data-y-Coordinate="${yCoordinate}"][data-side="player"]`
         );
         shipSquare.classList.add('ship');
       }

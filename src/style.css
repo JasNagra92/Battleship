@@ -43,5 +43,5 @@
     flex-direction: column;
 }
 .selected{
-    background-color: black;
+    background-color: blue;
 }
