@@ -33,10 +33,62 @@ function checkVerticalCollision(length, x, y) {
   }
   return true;
 }
+function randomHorizontalCoordinates(length, currentShipCoordinates) {
+  let repeat = true;
+  let xCoordinate = getRandomInt(9);
+  let yCoordinate = getRandomInt((10 - length));
+  if (currentShipCoordinates.length !== 0) {
+    while (repeat) {
+      // eslint-disable-next-line no-loop-func
+      currentShipCoordinates.forEach((coordinates) => {
+        if (coordinates[0][0] === xCoordinate || coordinates[0][1] === yCoordinate) {
+          xCoordinate = getRandomInt(9);
+          yCoordinate = getRandomInt((10 - length));
+          repeat = true;
+          // eslint-disable-next-line no-trailing-spaces
+        } else {
+          repeat = false;
+        }
+      });
+    }
+  }
+  const coordinates = [];
+  for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
+    coordinates.push([xCoordinate, i]);
+  }
+  return coordinates;
+}
+function randomVerticalCoordinates(length, currentShipCoordinates) {
+  let repeat = true;
+  let xCoordinate = getRandomInt((10 - length));
+  let yCoordinate = getRandomInt(9);
+  if (currentShipCoordinates.length !== 0) {
+    while (repeat) {
+      // eslint-disable-next-line no-loop-func
+      currentShipCoordinates.forEach((coordinates) => {
+        if (coordinates[0][0] === xCoordinate || coordinates[0][1] === yCoordinate) {
+          xCoordinate = getRandomInt((10 - length));
+          yCoordinate = getRandomInt(9);
+          repeat = true;
+          // eslint-disable-next-line no-trailing-spaces
+        } else {
+          repeat = false;
+        }
+      });
+    }
+  }
+  const coordinates = [];
+  for (let i = xCoordinate; i < xCoordinate + length; i += 1) {
+    coordinates.push([i, yCoordinate]);
+  }
+  return coordinates;
+}
 export {
   getRandomInt,
   checkHorizontalValid,
   checkVerticalValid,
   checkHorizontalCollision,
   checkVerticalCollision,
+  randomHorizontalCoordinates,
+  randomVerticalCoordinates,
 };
