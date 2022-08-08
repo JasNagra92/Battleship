@@ -4,10 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./main.js"></script>
+    <script src="./main.js" defer></script>
     <title>Battleship</title>
 </head>
 <body>
-    
+    <h1>Battleship</h1>
+    <div class="boardTitles">
+        <h2>Player Board</h2>
+        <h2>Cpu Board</h2>
+    </div>
+    <div class="optionsContainer">
+        <div>
+            <form action="#">
+                <label for="name">Player name:</label>
+                <input type="text" name="name" id="name" required>
+                <button type='button' id="createPlayer">Create Player</button>
+            </form>
+        </div>
+        <div class="shipSelectDiv">
+            <label for="ship">
+                Destroyer - length 2
+                <input type="radio" name="shipSelector" value="2" checked="true">
+            </label>
+            <label for="ship">
+                Submarine - length 3
+                <input type="radio" name="shipSelector" value="3">
+            </label>
+            <label for="ship">
+                Cruiser - length 3
+                <input type="radio" name="shipSelector" value="3">
+            </label>
+            <label for="ship">
+                Battelship - length 4
+                <input type="radio" name="shipSelector" value="4">
+            </label>
+            <label for="ship">
+                Carrier - length 5
+                <input type="radio" name="shipSelector" value="5">
+            </label>
+        </div>
+        <div>
+            <button type="button" id="shipOrientation">Horziontal/Vertical</button><br>
+            <p id="currentDirection">Current placement: Horziontal</p>
+        </div>
+    </div>
+    <div class="instructions">
+        <p id="instructions">Type in your name and press create Player to start the game</p>
+    </div>
 </body>
 </html>

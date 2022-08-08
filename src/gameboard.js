@@ -3,42 +3,68 @@ import { ShipFactory } from './shipfns';
 const GameboardFactory = () => ({
   ships: [],
   missedShots: [],
-  previousShots: [],
-  board: (function makeBoard() {
-    const board = new Array(10);
-    for (let i = 0; i < 10; i += 1) {
-      board[i] = new Array(10);
-      for (let j = 0; j < 10; j += 1) {
-        board[i][j] = null;
-      }
-    }
-    return board;
-  }()),
-  receiveAttack(x, y) {
-    this.previousShots.forEach((coordinates) => {
-      if (coordinates[0] === x && coordinates[1] === y) {
-        throw new Error('coordinates already hit');
-      }
-    });
-    let hit = false;
+
+  receiveAttack(x, y, target) {
     this.ships.forEach((ship) => {
-      ship.position.forEach((coordinates) => {
-        if (coordinates[0] === x && coordinates[1] === y) {
-          ship.hit(x, y);
-          hit = true;
-          ship.isSunk(ship.position);
-        }
-      });
+      ship.hit(x, y, target);
+      ship.isSunk(ship.position);
     });
-    if (!hit) { this.missedShots.push([x, y]) };
-    this.previousShots.push([x, y]);
   },
-  ShipFactory,
+  populateShipsArray(length, coordinates) {
+    this.ships.push(ShipFactory(length, coordinates));
+  },
   checkAllSunk(array) {
     if (array.every((ship) => ship.sunk === true)) {
       return true;
     }
     return false;
   },
+  placeShip(xCoordinate, yCoordinate, length, radioBtn, direction) {
+    if (direction === 'horizontal') {
+      for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
+        const shipSquare = document.querySelector(
+          `[data-x-Coordinate="${xCoordinate}"][data-y-Coordinate="${i}"][data-side="player"]`
+        );
+        shipSquare.classList.add('ship');
+      }
+      const coordinates = [];
+      for (let i = yCoordinate; i < yCoordinate + length; i += 1) {
+        coordinates.push([xCoordinate, i]);
+      }
+      this.populateShipsArray(length, coordinates);
+      /* logic to prevent user from placing a ship of the same length more than once */
+      radioBtn.setAttribute('disabled', 'disabled');
+      radioBtn.removeAttribute('checked');
+      /* logic to automatically select the next radio button and set it to checked 
+      after each ship is placed */
+      const btns = [
+        ...document.querySelectorAll('input[name="shipSelector"]:enabled'),
+      ];
+      if (btns.length >= 1) {
+        btns[0].checked = true;
+      }
+    } else if (direction === 'vertical') {
+      for (let i = xCoordinate; i < xCoordinate + length; i += 1) {
+        const shipSquare = document.querySelector(
+          `[data-x-Coordinate="${i}"][data-y-Coordinate="${yCoordinate}"][data-side="player"]`
+        );
+        shipSquare.classList.add('ship');
+      }
+      const coordinates = [];
+      for (let i = xCoordinate; i < xCoordinate + length; i += 1) {
+        coordinates.push([i, yCoordinate]);
+      }
+      this.populateShipsArray(length, coordinates);
+      radioBtn.setAttribute('disabled', 'disabled');
+      radioBtn.removeAttribute('checked');
+      const btns = [
+        ...document.querySelectorAll('input[name="shipSelector"]:enabled'),
+      ];
+      if (btns.length >= 1) {
+        btns[0].checked = true;
+      }
+    }
+  },
 });
+// eslint-disable-next-line import/prefer-default-export
 export { GameboardFactory };

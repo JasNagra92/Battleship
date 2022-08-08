@@ -1,12 +1,26 @@
 const Player = (name) => ({
   name,
-  attack(gameboard, coordinates) {
-    gameboard.receiveAttack(coordinates);
+  shots: [],
+  attack(gameboard, x, y, target) {
+    this.shots.forEach((coordinates) => {
+      if (coordinates[0] === x && coordinates[1] === y) {
+        throw new Error('coordinates already hit');
+      }
+    });
+    gameboard.receiveAttack(x, y, target);
+    this.shots.push([x, y]);
   },
 });
 const CpuPlayer = () => ({
-  attack(gameboard, coordinates) {
-    gameboard.receiveAttack(coordinates);
+  shots: [],
+  attack(gameboard, x, y, target) {
+    this.shots.forEach((coordinates) => {
+      if (coordinates[0] === x && coordinates[1] === y) {
+        throw new Error('coordinates already hit');
+      }
+    });
+    gameboard.receiveAttack(x, y, target);
+    this.shots.push([x, y]);
   },
 });
 export { Player, CpuPlayer };
