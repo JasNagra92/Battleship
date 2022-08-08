@@ -8,11 +8,18 @@
     <title>Battleship</title>
 </head>
 <body>
+    <h1>Battleship</h1>
+    <div class="boardTitles">
+        <h2>Player Board</h2>
+        <h2>Cpu Board</h2>
+    </div>
     <div class="optionsContainer">
         <div>
-            <label for="name">Player name:</label>
-            <input type="text" id="name">
-            <button id="createPlayer">Create Player</button>
+            <form action="#">
+                <label for="name">Player name:</label>
+                <input type="text" name="name" id="name" required>
+                <button type='button' id="createPlayer">Create Player</button>
+            </form>
         </div>
         <div class="shipSelectDiv">
             <label for="ship">
@@ -39,8 +46,10 @@
         <div>
             <button type="button" id="shipOrientation">Horziontal/Vertical</button><br>
             <p id="currentDirection">Current placement: Horziontal</p>
-
         </div>
+    </div>
+    <div class="instructions">
+        <p id="instructions">Type in your name and press create Player to start the game</p>
     </div>
 </body>
 </html>

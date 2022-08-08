@@ -1,9 +1,7 @@
 import './style.css';
 
 function createPlayerGrid() {
-  const h1 = document.createElement('h1');
   const optionsContainer = document.querySelector('.optionsContainer');
-  document.body.insertBefore(h1, optionsContainer);
 
   const main = document.createElement('div');
   document.body.insertBefore(main, optionsContainer);

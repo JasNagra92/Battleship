@@ -11,7 +11,9 @@ const ShipFactory = (length, position) => ({
         // eslint-disable-next-line no-param-reassign
         position[index] = 'hit';
         renderHits(x, y, target);
-      } else { renderMisses(x, y, target); }
+      } else {
+        renderMisses(x, y, target);
+      }
     });
   },
   isSunk(array) {

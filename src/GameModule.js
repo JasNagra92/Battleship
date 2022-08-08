@@ -14,6 +14,8 @@ import { createPlayerGrid } from './gridCreationDOM';
 
 function GameObject() {
   function StartGame() {
+    const instructions = document.querySelector('#instructions');
+    instructions.innerHTML = 'Place your ships, use the horizontal/vertical button to change orientation';
     const playerName = document.querySelector('#name').value;
     const player1 = Player(playerName);
     player1.gameboard = GameboardFactory();
@@ -148,6 +150,7 @@ function GameObject() {
           square.classList.remove('selected');
         });
         gamePhase = 'attack';
+        instructions.innerHTML = 'Choose a square on the Cpu Board to launch your missile!';
       }
     });
     cpuBoard.addEventListener('click', (e) => {
