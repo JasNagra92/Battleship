@@ -31,7 +31,7 @@ const CpuPlayer = () => ({
     this.shots.push([x, y]);
   },
   generateFleet() {
-    let currentShipCoordinates = [[0, 0]];
+    let currentShipCoordinates = [];
     for (let i = 2; i <= 5; i += 1) {
       if (i === 2) {
         const directionNumber = getRandomInt(2);
